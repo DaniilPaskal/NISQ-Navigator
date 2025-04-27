@@ -7,3 +7,7 @@ app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = Tr
 @app.get("/") 
 def ping():     
     return {"message": "Hello World"} 
+
+@app.post("/simulate")
+def simulate():
+    return

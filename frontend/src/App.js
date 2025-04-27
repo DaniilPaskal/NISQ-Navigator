@@ -4,7 +4,16 @@ import './App.css';
 function App() {
   const [qubits, setQubits] = useState([]);
 
-  
+  const simulate = async (circuit) => {
+    await fetch('http://localhost:8080/simulate/' + CurrentUser.userId, {
+      method: 'POST',
+      body: JSON.stringify(circuit)
+    })
+    .then()
+    .catch(err => {
+        alert("Error simulating circuit");
+    });
+  }
 
   return (
     <div className="App">
