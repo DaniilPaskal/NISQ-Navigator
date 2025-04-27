@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import { useState, useEffect } from "react";
 import './App.css';
 
 function App() {
+  const [qubits, setQubits] = useState([]);
+
+  
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>NISQ Navigator</p>
       </header>
+
+      <button name="addQubit">
+        Add qubit
+      </button>
+
+      <div className="circuit">   
+        {qubits.map((qubit) => (
+          <div className="qubit-row" key={q}>
+            {gates.map((g, i) => (
+              g.target === q || g.control === q ? (           
+                <div key={i} className="gate">
+                  {g.name}
+                </div>         
+              ) : (
+                <div key={i} className="empty-slot" />         
+              )       
+            ))}     
+          </div>   
+        ))} 
+      </div> 
     </div>
   );
 }
