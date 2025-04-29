@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [qubits, setQubits] = useState([]);
+  const [result, setResult] = useState("");
   const circuit = new Circuit();
   const gates = [];
 
@@ -11,9 +12,13 @@ function App() {
 
     await fetch('http://localhost:8080/simulate/' + CurrentUser.userId, {
       method: 'POST',
+      headers: { "Content-Type": "application/json" }, 
       body: JSON.stringify(circuit)
     })
-    .then()
+    .then(response => response.json())
+    .then(result => {
+      setResult(result);
+    })
     .catch(err => {
         alert("Error simulating circuit");
     });
