@@ -3,8 +3,12 @@ import './App.css';
 
 function App() {
   const [qubits, setQubits] = useState([]);
+  const circuit = new Circuit();
+  const gates = [];
 
-  const simulate = async (circuit) => {
+  const simulate = async () => {
+    parseInput();
+
     await fetch('http://localhost:8080/simulate/' + CurrentUser.userId, {
       method: 'POST',
       body: JSON.stringify(circuit)
@@ -15,15 +19,21 @@ function App() {
     });
   }
 
+  const parseInput = (input) => {   
+    const lines = input.trim().split('\n');   
+    
+    for (const line in lines) {
+      const lineComponents = line.trim().split(' ');
+    }    
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <p>NISQ Navigator</p>
       </header>
 
-      <button name="addQubit">
-        Add qubit
-      </button>
+      <textarea name="circuitInput" value={inputText} onChange={(e) => setInputText(e.target.value)} rows={8} />
 
       <div className="circuit">   
         {qubits.map((qubit) => (
@@ -40,6 +50,10 @@ function App() {
           </div>   
         ))} 
       </div> 
+
+      <button name="simulate" onClick={simulate}>
+        Simulate
+      </button>
     </div>
   );
 }
