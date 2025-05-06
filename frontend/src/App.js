@@ -63,9 +63,11 @@ function App() {
         Simulate
       </button>
 
-      <p>
-        {result}
-      </p>
+      <div>
+        <label for="result">Result:</label>
+        <input name="result" value={result} disabled/>
+      </div>
+      
     </div>
   );
 }
