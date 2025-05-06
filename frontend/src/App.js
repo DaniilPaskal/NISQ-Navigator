@@ -62,6 +62,10 @@ function App() {
       <button name="simulate" onClick={simulate}>
         Simulate
       </button>
+
+      <p>
+        {result}
+      </p>
     </div>
   );
 }
