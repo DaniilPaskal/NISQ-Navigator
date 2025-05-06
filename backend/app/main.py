@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
 
-from circuit import Circuit
+from app.models.circuit import Circuit
 
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = True, allow_methods = ["*"], allow_headers = ["*"])

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from gate import Gate
+from app.models.gate import Gate
 
 class Circuit(BaseModel):     
     qubits: int     
