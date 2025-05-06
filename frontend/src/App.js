@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { Circuit } from "./classes/circuit";
+import { Gate } from "./classes/gate";
 import './App.css';
 
 function App() {
   const [qubits, setQubits] = useState([]);
+  const [inputText, setInputText] = useState("");
   const [result, setResult] = useState("");
   const circuit = new Circuit();
   const gates = [];
@@ -10,7 +13,7 @@ function App() {
   const simulate = async () => {
     parseInput();
 
-    await fetch('http://localhost:8080/simulate/' + CurrentUser.userId, {
+    await fetch('http://localhost:8080/simulate/', {
       method: 'POST',
       headers: { "Content-Type": "application/json" }, 
       body: JSON.stringify(circuit)
@@ -24,8 +27,8 @@ function App() {
     });
   }
 
-  const parseInput = (input) => {   
-    const lines = input.trim().split('\n');   
+  const parseInput = () => {   
+    const lines = inputText.trim().split('\n');   
     
     for (const line in lines) {
       const lineComponents = line.trim().split(' ');
@@ -42,9 +45,9 @@ function App() {
 
       <div className="circuit">   
         {qubits.map((qubit) => (
-          <div className="qubit-row" key={q}>
+          <div className="qubit-row" key={qubit}>
             {gates.map((g, i) => (
-              g.target === q || g.control === q ? (           
+              g.target === qubit || g.control === qubit ? (           
                 <div key={i} className="gate">
                   {g.name}
                 </div>         

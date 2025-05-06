@@ -1,4 +1,4 @@
-class Circuit {
+export class Circuit {
     qubits = [];
     gates = [];
 
