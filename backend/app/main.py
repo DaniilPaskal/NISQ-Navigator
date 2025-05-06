@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from qiskit import QuantumCircuit, AerSimulator
+from qiskit import QuantumCircuit
+from qiskit_aer import AerSimulator
 
 from circuit import Circuit
 
