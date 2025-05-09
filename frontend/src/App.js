@@ -75,13 +75,13 @@ function App() {
         ))} 
       </div> 
 
-      {/* {errors.length > 0 && (
+      {errors.length > 0 && (
         <div className="errors">
           {errors.map((error) => 
             <p key={error}>{error}</p>
           )}   
         </div>
-      )}  */}
+      )} 
 
       <button name="simulate" onClick={simulate}>
         Simulate
