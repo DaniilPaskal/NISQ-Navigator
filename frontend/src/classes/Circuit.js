@@ -1,5 +1,5 @@
 export class Circuit {
-    qubits = [];
+    qubits = 0;
     gates = [];
 
     constructor(qubits, gates) {
@@ -7,11 +7,11 @@ export class Circuit {
       this.gates = gates;
     }
 
-    addQubit(qubit) {
-        this.qubits.push(qubit);
+    setQubits(qubits) {
+        this.qubits = qubits;
     }
 
-    addGate(gate) {
-      this.gates.push(gate);
+    setGates(gates) {
+      this.gates = gates;
     }
   }
