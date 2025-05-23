@@ -27,8 +27,18 @@ export function parseInput(inputText) {
         }
       }
     }  
+
+    const qubits = lines.length;
+
+    for (var gate in gates) {
+      if (gates[gate].control > qubits) {
+        qubits = gates[gate].control;
+      }
+      if (gates[gate].target > qubits) {
+        qubits = gates[gate].target;
+      }
+    }
     
-    const qubits = Math.max(...gates.flatMap(gate => [gate.target, gate.control ?? -1])) + 1;
     const circuit = new Circuit(qubits, gates);
     
     return circuit;
