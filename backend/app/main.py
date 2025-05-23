@@ -16,6 +16,8 @@ def ping():
 def simulate(data):
     circuit = QuantumCircuit(data.qubits)
 
+    print("gates: " + data.gates)
+
     for gate in data.gates:
         if (gate.name == "h"):
             circuit.h(gate.target)
@@ -26,5 +28,7 @@ def simulate(data):
     circuit.save_statevector() 
     result = simulator.run(circuit).result() 
     statevector = result.get_statevector()
+
+    print("statevector: " + statevector)
     
     return statevector

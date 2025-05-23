@@ -16,6 +16,9 @@ function App() {
     setQubits(circuit.qubits);
     setGates(circuit.gates);
 
+    console.log("qubits: " + circuit.qubits)
+    console.log("gates: " + circuit.gates)
+
     await fetch('http://localhost:8080/simulate/', {
       method: 'POST',
       headers: { "Content-Type": "application/json" }, 
@@ -38,20 +41,23 @@ function App() {
 
       <textarea name="circuitInput" value={inputText} onChange={(e) => setInputText(e.target.value)} rows={8} />
 
-      <div className="circuit">   
-        {qubits.map((qubit) => (
-          <div className="qubit-row" key={qubit}>
-            {gates.map((gate) => (
-              gate.target === qubit || gate.control === qubit ? (           
-                <div key={gate} className="gate">
-                  {gate.name}
-                </div>         
-              ) : (
-                <div key={gate} className="empty-slot" />         
-              )       
-            ))}     
-          </div>   
-        ))} 
+      <div className="circuit">
+
+        {qubits.length > 0 && (   
+          qubits.map((qubit) => (
+            <div className="qubit-row" key={qubit}>
+              {gates.map((gate) => (
+                gate.target === qubit || gate.control === qubit ? (           
+                  <div key={gate} className="gate">
+                    {gate.name}
+                  </div>         
+                ) : (
+                  <div key={gate} className="empty-slot" />         
+                )       
+              ))}     
+            </div>   
+          )) 
+        )}
       </div> 
 
       {errors.length > 0 && (
