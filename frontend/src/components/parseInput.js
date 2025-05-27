@@ -15,18 +15,21 @@ export function parseInput(inputText) {
 
       for (var i = 0; i < lineComponents.length; i++) {
         console.log("current component: " + lineComponents[i])
+        console.log("gates: " + gates)
 
         if (lineComponents[i] === "h") {
           if (i < lineComponents.length) {
-            gates.push(new Gate("h"), parseInt(lineComponents[i + 1], -1));
+            gates.push(new Gate("h", parseInt(lineComponents[i + 1], -1)));
           }
         } else if (lineComponents[i] === "cx") {
           if (i < lineComponents.length - 1) {
-            gates.push(new Gate("cx"), parseInt(lineComponents[i + 1], parseInt(lineComponents[i + 2])));
+            gates.push(new Gate("cx", parseInt(lineComponents[i + 1], parseInt(lineComponents[i + 2]))));
           }
         }
       }
     }  
+
+    console.log("gates: " + gates[0])
 
     const qubits = lines.length;
 
