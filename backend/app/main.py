@@ -22,7 +22,8 @@ async def simulate(circuit: Circuit):
         elif (gate.name == "cx"):
             q_circuit.cx(gate.control, gate.target)
 
-    simulator = AerSimulator() 
+    noise_model = get_noise_model()
+    simulator = AerSimulator(noise_model) 
     q_circuit.save_statevector() 
     result = simulator.run(q_circuit).result() 
     statevector = result.get_statevector()
