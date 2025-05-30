@@ -5,25 +5,16 @@ export function parseInput(inputText) {
     const lines = inputText.trim().split('\n');
     const gates = [];
 
+    const singleQubitGates = ["h", "id", "x", "y", "z"];
+
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
 
-
       for (var i = 0; i < lineComponents.length; i++) {
-
-
         // Uncontrolled gates
-        if (lineComponents[i] === "h") {
+        if (singleQubitGates.includes(lineComponents[i])) {
           if (i < lineComponents.length) {
-            gates.push(new Gate("h", parseInt(lineComponents[i + 1]), -1));
-          }
-        } else if (lineComponents[i] === "id") {
-          if (i < lineComponents.length - 1) {
-            gates.push(new Gate("id", parseInt(lineComponents[i + 1]), -1));
-          }
-        else if (lineComponents[i] === "pauli") {
-          if (i < lineComponents.length - 1) {
-            gates.push(new Gate("pauli", parseInt(lineComponents[i + 1]), -1));
+            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), -1));
           }
         // Controlled gates
         } else if (lineComponents[i] === "cx") {
