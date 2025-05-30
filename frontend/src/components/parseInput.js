@@ -19,7 +19,7 @@ export function parseInput(inputText) {
 
         if (lineComponents[i] === "h") {
           if (i < lineComponents.length) {
-            gates.push(new Gate("h", parseInt(lineComponents[i + 1], -1)));
+            gates.push(new Gate("h", parseInt(lineComponents[i + 1]), -1));
           }
         } else if (lineComponents[i] === "cx") {
           if (i < lineComponents.length - 1) {
