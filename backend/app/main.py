@@ -29,3 +29,10 @@ async def simulate(circuit: Circuit):
     
     return statevector
 
+def get_noise_model():
+    noise_model = NoiseModel()
+    noise_model.add_all_qubit_quantum_error(depolarizing_error(0.05, 1), ['h']) 
+    noise_model.add_all_qubit_quantum_error(depolarizing_error(0.05, 2), ['cx'])
+
+    return noise_model
+
