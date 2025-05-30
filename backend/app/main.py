@@ -19,6 +19,14 @@ async def simulate(circuit: Circuit):
     for gate in circuit.gates:
         if (gate.name == "h"):
             q_circuit.h(gate.target)
+        elif (gate.name == "id"):
+            q_circuit.h(gate.target)
+        elif (gate.name == "x"):
+            q_circuit.h(gate.target)
+        elif (gate.name == "y"):
+            q_circuit.h(gate.target)
+        elif (gate.name == "z"):
+            q_circuit.h(gate.target)
         elif (gate.name == "cx"):
             q_circuit.cx(gate.control, gate.target)
 
