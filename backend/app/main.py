@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from qiskit import QuantumCircuit
-from qiskit_aer import AerSimulator
+from qiskit_aer import AerSimulator, NoiseModel, depolarizing_error
 
 from app.models.circuit import Circuit
 
@@ -14,17 +14,18 @@ def ping():
 
 @app.post("/simulate")
 async def simulate(circuit: Circuit):
-    qCircuit = QuantumCircuit(circuit.qubits + 1)
+    q_circuit = QuantumCircuit(circuit.qubits + 1)
 
     for gate in circuit.gates:
         if (gate.name == "h"):
-            qCircuit.h(gate.target)
+            q_circuit.h(gate.target)
         elif (gate.name == "cx"):
-            qCircuit.cx(gate.control, gate.target)
+            q_circuit.cx(gate.control, gate.target)
 
     simulator = AerSimulator() 
-    qCircuit.save_statevector() 
-    result = simulator.run(qCircuit).result() 
+    q_circuit.save_statevector() 
+    result = simulator.run(q_circuit).result() 
     statevector = result.get_statevector()
     
     return statevector
+
