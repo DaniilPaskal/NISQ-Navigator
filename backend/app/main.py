@@ -13,22 +13,18 @@ def ping():
     return {"message": "Hello World"} 
 
 @app.post("/simulate")
-def simulate(data):
-    circuit = QuantumCircuit(data.qubits)
+async def simulate(circuit: Circuit):
+    qCircuit = QuantumCircuit(circuit.qubits + 1)
 
-    print("gates: " + data.gates)
-
-    for gate in data.gates:
+    for gate in circuit.gates:
         if (gate.name == "h"):
-            circuit.h(gate.target)
+            qCircuit.h(gate.target)
         elif (gate.name == "cx"):
-            circuit.cx(gate.control, gate.target)
+            qCircuit.cx(gate.control, gate.target)
 
     simulator = AerSimulator() 
-    circuit.save_statevector() 
-    result = simulator.run(circuit).result() 
+    qCircuit.save_statevector() 
+    result = simulator.run(qCircuit).result() 
     statevector = result.get_statevector()
-
-    print("statevector: " + statevector)
     
     return statevector
