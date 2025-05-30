@@ -17,10 +17,20 @@ export function parseInput(inputText) {
         console.log("current component: " + lineComponents[i])
         console.log("gates: " + gates)
 
+        // Uncontrolled gates
         if (lineComponents[i] === "h") {
           if (i < lineComponents.length) {
             gates.push(new Gate("h", parseInt(lineComponents[i + 1]), -1));
           }
+        } else if (lineComponents[i] === "id") {
+          if (i < lineComponents.length - 1) {
+            gates.push(new Gate("id", parseInt(lineComponents[i + 1]), -1));
+          }
+        else if (lineComponents[i] === "pauli") {
+          if (i < lineComponents.length - 1) {
+            gates.push(new Gate("pauli", parseInt(lineComponents[i + 1]), -1));
+          }
+        // Controlled gates
         } else if (lineComponents[i] === "cx") {
           if (i < lineComponents.length - 1) {
             gates.push(new Gate("cx", parseInt(lineComponents[i + 1], parseInt(lineComponents[i + 2]))));
