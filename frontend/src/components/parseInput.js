@@ -5,17 +5,12 @@ export function parseInput(inputText) {
     const lines = inputText.trim().split('\n');
     const gates = [];
 
-    console.log(inputText)
-    console.log(lines)
-
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
 
-      console.log(lineComponents)
 
       for (var i = 0; i < lineComponents.length; i++) {
-        console.log("current component: " + lineComponents[i])
-        console.log("gates: " + gates)
+
 
         // Uncontrolled gates
         if (lineComponents[i] === "h") {
@@ -38,8 +33,6 @@ export function parseInput(inputText) {
         }
       }
     }  
-
-    console.log("gates: " + gates[0])
 
     const qubits = lines.length;
 
