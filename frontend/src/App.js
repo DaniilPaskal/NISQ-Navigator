@@ -16,9 +16,6 @@ function App() {
     setQubits(circuit.qubits);
     setGates(circuit.gates);
 
-    console.log("qubits: " + circuit.qubits)
-    console.log("gates: " + circuit.gates)
-
     await fetch('http://localhost:8000/simulate', {
       method: 'POST',
       headers: { "Content-Type": "application/json" }, 
