@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from qiskit import QuantumCircuit
-from qiskit_aer import AerSimulator, NoiseModel, depolarizing_error
+from qiskit_aer import AerSimulator
+from qiskit_aer.noise import NoiseModel, depolarizing_error
 
 from app.models.circuit import Circuit
 
