@@ -18,26 +18,37 @@ async def simulate(circuit: Circuit):
     q_circuit = QuantumCircuit(circuit.qubits + 1)
 
     for gate in circuit.gates:
+        # Hadamard
         if (gate.name == "h"):
             q_circuit.h(gate.target)
+        # Identity 
         elif (gate.name == "id"):
             q_circuit.h(gate.target)
+        # Pauli X
         elif (gate.name == "x"):
             q_circuit.h(gate.target)
+        # Pauli Y
         elif (gate.name == "y"):
             q_circuit.h(gate.target)
+        # Pauli Z
         elif (gate.name == "z"):
             q_circuit.h(gate.target)
+        # Controlled Not
         elif (gate.name == "cx"):
             q_circuit.cx(gate.control[0], target_qubit=gate.target)
+        # Toffoli
         elif (gate.name == "ccx"):
             q_circuit.ccx(gate.control[0], gate.control[1], gate.target)
+        # Phase
         elif (gate.name == "p"):
             q_circuit.p(gate.target, gate.theta)
+        # Rotation X
         elif (gate.name == "rx"):
             q_circuit.rx(gate.target, gate.theta)
+        # Rotation Y
         elif (gate.name == "ry"):
             q_circuit.ry(gate.target, gate.theta)
+        # Rotation Z
         elif (gate.name == "rz"):
             q_circuit.rz(gate.target, gate.theta)
 

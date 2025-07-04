@@ -5,8 +5,11 @@ export function parseInput(inputText) {
     const lines = inputText.trim().split('\n');
     const gates = [];
 
+    // Hadamard, Identity, Pauli X, Pauli Y, Pauli Z
     const singleQubitGates = ["h", "id", "x", "y", "z"];
+    // Controlled Not, Toffoli
     const multiQubitGates = ["cx", "ccx"];
+    // Phase, Rotation X, Rotation Y, Rotation Z
     const thetaGates = ["p", "rx", "ry", "rz"];
 
     for (var line in lines) {
