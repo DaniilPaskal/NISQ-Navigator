@@ -5,3 +5,4 @@ class Gate(BaseModel):
     name: str
     target: int
     control: Optional[int] = None
+    theta: float
