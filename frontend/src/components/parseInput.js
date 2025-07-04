@@ -5,7 +5,7 @@ export function parseInput(inputText) {
     const lines = inputText.trim().split('\n');
     const gates = [];
 
-    const singleQubitGates = ["h", "id", "x", "y", "z"];
+    const singleQubitGates = ["h", "id", "x", "y", "z", "rx", "ry", "rz"];
     const multiQubitGates = ["cx", "ccx"];
 
     for (var line in lines) {
@@ -15,7 +15,7 @@ export function parseInput(inputText) {
       if (singleQubitGates.includes(lineComponents[i])) {
         gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), []));
       // Controlled gates
-      } else if (lineComponents.includes(lineComponents[i])) {
+      } else if (multiQubitGates.includes(lineComponents[i])) {
         var controlQubits = [];
 
         for (var i = 2; i < lineComponents.length; i++) {
