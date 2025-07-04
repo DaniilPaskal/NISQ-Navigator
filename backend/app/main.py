@@ -29,7 +29,17 @@ async def simulate(circuit: Circuit):
         elif (gate.name == "z"):
             q_circuit.h(gate.target)
         elif (gate.name == "cx"):
-            q_circuit.cx(gate.control, gate.target)
+            q_circuit.cx(gate.control[0], target_qubit=gate.target)
+        elif (gate.name == "ccx"):
+            q_circuit.ccx(gate.control[0], gate.control[1], gate.target)
+        elif (gate.name == "p"):
+            q_circuit.p(gate.target, gate.theta)
+        elif (gate.name == "rx"):
+            q_circuit.rx(gate.target, gate.theta)
+        elif (gate.name == "ry"):
+            q_circuit.ry(gate.target, gate.theta)
+        elif (gate.name == "rz"):
+            q_circuit.rz(gate.target, gate.theta)
 
     noise_model = get_noise_model()
     simulator = AerSimulator(noise_model=noise_model) 

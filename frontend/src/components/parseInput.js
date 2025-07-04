@@ -5,9 +5,9 @@ export function parseInput(inputText) {
     const lines = inputText.trim().split('\n');
     const gates = [];
 
-    const singleQubitGates = ["h", "id", "x", "y", "z", "rx", "ry", "rz"];
+    const singleQubitGates = ["h", "id", "x", "y", "z"];
     const multiQubitGates = ["cx", "ccx"];
-    const thetaGates = ["p"];
+    const thetaGates = ["p", "rx", "ry", "rz"];
 
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
