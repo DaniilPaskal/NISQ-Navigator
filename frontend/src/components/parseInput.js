@@ -11,18 +11,18 @@ export function parseInput(inputText) {
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
 
-      for (var i = 0; i < lineComponents.length; i++) {
-        // Uncontrolled gates
-        if (singleQubitGates.includes(lineComponents[i])) {
-          if (i < lineComponents.length) {
-            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), -1));
-          }
-        // Controlled gates
-        } else if (lineComponents.includes(lineComponents[i])) {
-          if (i < lineComponents.length - 1) {
-            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], parseInt(lineComponents[i + 2]))));
-          }
+      // Uncontrolled gates
+      if (singleQubitGates.includes(lineComponents[i])) {
+        gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), []));
+      // Controlled gates
+      } else if (lineComponents.includes(lineComponents[i])) {
+        var controlQubits = [];
+
+        for (var i = 2; i < lineComponents.length; i++) {
+          controlQubits.push(lineComponents[i]);
         }
+
+        gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
       }
     }  
 

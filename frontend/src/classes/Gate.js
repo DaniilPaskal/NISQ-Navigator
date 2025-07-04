@@ -1,7 +1,7 @@
 export class Gate {
     name = "";
     target = null;
-    control = null;
+    control = [];
 
     constructor(name, target, control) {
       this.name = name;
