@@ -7,13 +7,14 @@ export function parseInput(inputText) {
 
     const singleQubitGates = ["h", "id", "x", "y", "z", "rx", "ry", "rz"];
     const multiQubitGates = ["cx", "ccx"];
+    const thetaGates = ["p"];
 
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
 
       // Uncontrolled gates
       if (singleQubitGates.includes(lineComponents[i])) {
-        gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), []));
+        gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1])));
       // Controlled gates
       } else if (multiQubitGates.includes(lineComponents[i])) {
         var controlQubits = [];
@@ -23,6 +24,8 @@ export function parseInput(inputText) {
         }
 
         gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
+      } else if (thetaGates.includes(lineComponents[i])) {
+        gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
       }
     }  
 
