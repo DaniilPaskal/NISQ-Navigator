@@ -15,24 +15,26 @@ export function parseInput(inputText) {
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
 
-      // Uncontrolled gates
-      if (singleQubitGates.includes(lineComponents[i])) {
-        gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1])));
-      // Controlled gates
-      } else if (multiQubitGates.includes(lineComponents[i])) {
-        var controlQubits = [];
+      for (var i = 0; i < lineComponents.length; i++) {
+        // Uncontrolled gates
+        if (singleQubitGates.includes(lineComponents[i])) {
+          gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1])));
+        // Controlled gates
+        } else if (multiQubitGates.includes(lineComponents[i])) {
+          var controlQubits = [];
 
-        for (var i = 2; i < lineComponents.length; i++) {
-          controlQubits.push(lineComponents[i]);
+          for (var j = 2; j < lineComponents.length; j++) {
+            controlQubits.push(lineComponents[j]);
+          }
+
+          gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
+        } else if (thetaGates.includes(lineComponents[i])) {
+          gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
         }
-
-        gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
-      } else if (thetaGates.includes(lineComponents[i])) {
-        gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
       }
     }  
 
-    const qubits = lines.length;
+    var qubits = lines.length;
 
     for (var gate in gates) {
       if (gates[gate].control > qubits) {
