@@ -28,6 +28,7 @@ export function parseInput(inputText) {
           }
 
           gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
+        // Theta gates
         } else if (thetaGates.includes(lineComponents[i])) {
           gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
         }
