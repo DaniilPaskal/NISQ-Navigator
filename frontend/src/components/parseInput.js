@@ -18,19 +18,25 @@ export function parseInput(inputText) {
       for (var i = 0; i < lineComponents.length; i++) {
         // Uncontrolled gates
         if (singleQubitGates.includes(lineComponents[i])) {
-          gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1])));
+          if (i < lineComponents.length - 1) {
+            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1])));
+          }
         // Controlled gates
         } else if (multiQubitGates.includes(lineComponents[i])) {
-          var controlQubits = [];
+          if (i < lineComponents.length - 2) {
+            var controlQubits = [];
 
-          for (var j = 2; j < lineComponents.length; j++) {
-            controlQubits.push(lineComponents[j]);
+            for (var j = i + 2; j < lineComponents.length; j++) {
+              controlQubits.push(lineComponents[j]);
+            }
+            
+            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
           }
-
-          gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
         // Theta gates
         } else if (thetaGates.includes(lineComponents[i])) {
-          gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
+          if (i < lineComponents.length - 1) {
+            gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
+          }
         }
       }
     }  
