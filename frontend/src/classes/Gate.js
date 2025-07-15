@@ -4,7 +4,7 @@ export class Gate {
     control = [];
     theta = null;
 
-    constructor(name, target, control = [], theta = null) {
+    constructor(name, target, control, theta) {
       this.name = name;
       this.target = target;
       this.control = control;
