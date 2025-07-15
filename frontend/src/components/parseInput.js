@@ -27,10 +27,10 @@ export function parseInput(inputText) {
             var controlQubits = [];
 
             for (var j = i + 2; j < lineComponents.length; j++) {
-              controlQubits.push(lineComponents[j]);
+              controlQubits.push(parseInt(lineComponents[j]));
             }
 
-            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1], controlQubits)));
+            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), controlQubits));
           }
         // Theta gates
         } else if (thetaGates.includes(lineComponents[i])) {
