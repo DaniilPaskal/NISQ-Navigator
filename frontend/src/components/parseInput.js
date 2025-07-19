@@ -35,7 +35,7 @@ export function parseInput(inputText) {
         // Theta gates
         } else if (thetaGates.includes(lineComponents[i])) {
           if (i < lineComponents.length - 2) {
-            gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseInt(lineComponents[i + 2]))
+            gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseFloat(lineComponents[i + 2]))
           }
         }
       }
