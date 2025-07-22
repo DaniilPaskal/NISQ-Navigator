@@ -7,42 +7,64 @@ export function parseInput(inputText) {
 
     // Hadamard, Identity, Pauli X, Pauli Y, Pauli Z
     const singleQubitGates = ["h", "id", "x", "y", "z"];
-    // Controlled Not, Toffoli
-    const multiQubitGates = ["cx", "ccx"];
     // Phase, Rotation X, Rotation Y, Rotation Z
     const thetaGates = ["p", "rx", "ry", "rz"];
+    // Controlled Not, Toffoli
+    const multiQubitGates = ["cx", "ccx"];
 
     for (var line in lines) {
       const lineComponents = lines[line].trim().split(' ');
 
       for (var i = 0; i < lineComponents.length; i++) {
-        // Uncontrolled gates
-        if (singleQubitGates.includes(lineComponents[i])) {
-          if (i < lineComponents.length - 1) {
-            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1])));
-          }
-        // Controlled gates
-        } else if (multiQubitGates.includes(lineComponents[i])) {
-          if (i < lineComponents.length - 2) {
-            var controlQubits = [];
+        const gate = lineComponents[i];
 
-            for (var j = i + 2; j < lineComponents.length; j++) {
-              controlQubits.push(parseInt(lineComponents[j]));
-            }
-
-            gates.push(new Gate(lineComponents[i], parseInt(lineComponents[i + 1]), controlQubits));
-          }
-        // Theta gates
-        } else if (thetaGates.includes(lineComponents[i])) {
-          if (i < lineComponents.length - 2) {
-            gates.push(new Gate(lineComponents[i]), parseInt(lineComponents[i + 1]), [], parseFloat(lineComponents[i + 2]))
-          }
+        // Not a gate
+        if (!isNaN(gate)) {
+          continue;
         }
+
+        if (i < lineComponents.length - 1) {
+          const target = parseInt(lineComponents[i + 1]);
+
+          // Uncontrolled gates
+          if (singleQubitGates.includes(gate)) {
+            gates.push(new Gate(gate, target));
+          // Theta gates
+          } else if (thetaGates.includes(gate)) {
+            if (i < lineComponents.length - 2) {
+              const theta = parseFloat(lineComponents[i + 2]);
+
+              gates.push(new Gate(gate, target, [], theta));
+            } else {
+
+            }
+          // Controlled gates
+          } else if (multiQubitGates.includes(gate)) {
+            if (i < lineComponents.length - 2) {
+              var controls = [];
+
+              for (var j = i + 2; j < lineComponents.length; j++) {
+                controls.push(parseInt(lineComponents[j]));
+              }
+
+              gates.push(new Gate(gate, target, controls));
+            } else {
+              
+            }
+          } else {
+            alert("Error: .");
+          }
+        } else {
+          
+        }
+
+        
       }
     }  
 
     var qubits = lines.length;
 
+    // Find highest qubit
     for (var gate in gates) {
       if (gates[gate].control > qubits) {
         qubits = gates[gate].control;
