@@ -25,8 +25,8 @@ function App() {
     .then(result => {
       setResult(result);
     })
-    .catch(err => {
-        alert("Error simulating circuit");
+    .catch(error => {
+        alert("Error simulating circuit.");
     });
   }
 

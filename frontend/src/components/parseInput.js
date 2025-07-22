@@ -36,7 +36,7 @@ export function parseInput(inputText) {
 
               gates.push(new Gate(gate, target, [], theta));
             } else {
-
+              alert(`Error: gate "${gate}" is missing a theta value.`);
             }
           // Controlled gates
           } else if (multiQubitGates.includes(gate)) {
@@ -49,13 +49,13 @@ export function parseInput(inputText) {
 
               gates.push(new Gate(gate, target, controls));
             } else {
-              
+              alert(`Error: gate "${gate}" is missing control qubits.`);
             }
           } else {
-            alert("Error: .");
+            alert(`Error: "${gate}" is not a recognized gate.`);
           }
         } else {
-          
+          alert(`Error: gate "${gate}" is missing parameters.`);
         }
 
         
